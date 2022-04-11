@@ -4,6 +4,7 @@
   border-bottom: 2px solid rgba(var(--secondary-color), 1);
   background-color: rgba(var(--white-color), 1);
 
+  z-index: 5;
   @media screen and (max-width: 769px) {
     position: sticky;
     top: 0;
@@ -39,11 +40,15 @@
 }
 
 .app__navbar-nav {
+  z-index: 5;
+
+
   @media screen and (max-width: 768px) {
     display: none;
   }
   margin-left: 20px;
   ul {
+
     display: flex;
     li {
       padding: 20px 10px;
@@ -140,6 +145,7 @@
 }
 
 .app__navbar-right-nav {
+  z-index: 5;
   display: flex;
   align-items: center;
   gap: 15px;
