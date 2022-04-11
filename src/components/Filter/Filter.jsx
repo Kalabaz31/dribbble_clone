@@ -1,22 +1,57 @@
-import React,{useState} from 'react'
+import React, { useRef, useState, useEffect } from "react";
+import { BsFilter } from "react-icons/bs";
+import { Dropdown, HorizontalListSlider } from "../";
 
-import "./Filter.scss"
+import "./Filter.scss";
+
+const sortOptions = ["Follwing", "Popular", "New & Noteworthy"];
+
+const categories = [
+  "Animation",
+  "Branding",
+  "Illustration",
+  "Mobile",
+  "Print",
+  "Product Design",
+  "Typography",
+  "Web Design",
+];
 
 const Filter = () => {
-
-  const [sortBtnClick, setSortBtnClick] = useState(false);
   return (
-    <div className='app__filter'>
-      <div className='sort-dropdown'>
+    <div className="app__filter">
+      <div className="filters">
+        <div className="sortFilter">
+          <Dropdown list={sortOptions} />
+        </div>
+        <HorizontalListSlider list={categories} />
 
-        <button onClick={()=>setSortBtnClick(!sortBtnClick) } className={sortBtnClick ? "dropped" : ""}> Popular </button>
+        <button className="btnFilter">
+          <BsFilter fontSize={24} />
+          Filters
+        </button>
+      </div>
 
-        <ul>
-          <li><a href=""></a></li>
-        </ul>
+      <div className="filter-inputs">
+        <div className="input-item">
+          <p>Tags</p>
+          <Dropdown list={sortOptions} />
+        </div>
+        <div className="input-item">
+          <p>Color</p>
+          <Dropdown list={sortOptions} />
+        </div>
+        <div className="input-item">
+          <p>Made With</p>
+          <Dropdown list={sortOptions} />
+        </div>
+        <div className="input-item">
+          <p>Downloads</p>
+          <Dropdown list={sortOptions} />
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Filter
+export default Filter;
