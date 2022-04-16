@@ -195,10 +195,15 @@
       }
     }
   }
+  
+  a{
+    color: rgba(var(--primary-text-color), 1);
+  }
+  .button {
 
-  .upload {
-
+    width: max-content;
     button {
+      width: 100%;
       border: 0;
       padding: 10px 20px;
       border-radius: 5px;
@@ -230,6 +235,8 @@
       height: 30px;
       border-radius: 50%;
       overflow: hidden;
+
+      border: 1px solid rgba(var(--black-color), 0.1);
       img {
         width: 100%;
         height: auto;
@@ -260,6 +267,7 @@
           transition: all 0.2s ease;
           width: 100%;
           border-radius: 0;
+          border: 0;
         }
 
         &:hover {

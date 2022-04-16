@@ -1,6 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+
 import { Shots } from "./containers";
-import { Filter, Navbar } from "./components";
+import { Navbar, Login, Logout, Register } from "./components";
 
 import "./App.scss";
 
@@ -8,8 +10,53 @@ function App() {
   const [noScroll, setNoScroll] = useState(false);
   return (
     <div className={`App ${!noScroll ? "" : "noscroll"}`}>
-        <Navbar setNoScroll={setNoScroll} />
-        <Shots />
+      <Routes>
+        <Route path="/shots">
+          <Route path="/shots/:type">
+            <Route
+              path="/shots/:type/:category"
+              element={
+                <>
+                  <Navbar setNoScroll={setNoScroll} />
+                  <Shots pathName="/shots" />
+                </>
+              }
+            />
+            <Route
+              path=""
+              element={
+                <>
+                  <Navbar setNoScroll={setNoScroll} />
+                  <Shots pathName="/shots" />
+                </>
+              }
+            />
+          </Route>
+          <Route
+            path=""
+            element={
+              <>
+                <Navbar setNoScroll={setNoScroll} />
+                <Shots pathName="/shots" />
+              </>
+            }
+          />
+        </Route>
+
+        <Route exact path="/Register" element={<Register />} />
+        <Route exact path="/Login" element={<Login />} />
+        <Route exact path="/logout" element={<Logout/> } />
+        <Route
+          exact
+          path="/"
+          element={
+            <>
+              <Navbar setNoScroll={setNoScroll} />
+              <Shots pathName="/shots" />
+            </>
+          }
+        />
+      </Routes>
     </div>
   );
 }

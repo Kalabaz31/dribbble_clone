@@ -1,3 +1,7 @@
-.app__shots{
-    min-height: 4000px;
+.app__shots-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 20px;
+  gap: 20px;
+  justify-content: space-evenly;
 }

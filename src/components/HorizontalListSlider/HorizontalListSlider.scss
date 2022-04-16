@@ -8,7 +8,7 @@
     max-width: 750px;
     .scroll-backward,
     .scroll-forward {
-      a {
+      button {
         cursor: pointer;
         position: absolute;
         padding: 5px 10px;
@@ -17,17 +17,18 @@
         font-size: 16px;
         color: black;
         top: 10%;
+        background: transparent;
       }
       z-index: 2;
     }
   
     .scroll-backward {
-      a {
+      button {
         left: 0;
       }
     }
     .scroll-forward {
-      a {
+      button {
         right: 0;
       }
     }
@@ -42,7 +43,7 @@
       &::after {
         content: "";
         position: absolute;
-        width: 30px;
+        width: 40px;
         height: 100%;
       }
   
@@ -51,7 +52,7 @@
         left: 0;
       }
       &::after {
-        background: linear-gradient(to right, transparent, white);
+        background: linear-gradient(to right, transparent,white);
         right: 0;
       }
   

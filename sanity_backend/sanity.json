@@ -1,11 +1,11 @@
 {
   "root": true,
+  "api": {
+    "projectId": "lx7gielk",
+    "dataset": "production"
+  },
   "project": {
     "name": "dribbble"
-  },
-  "api": {
-    "projectId": "9zzihjar",
-    "dataset": "production"
   },
   "plugins": [
     "@sanity/base",
