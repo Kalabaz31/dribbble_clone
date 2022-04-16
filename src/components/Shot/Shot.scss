@@ -74,14 +74,14 @@
         }
 
         .activeIcon {
-          background: rgb(255, 220, 230);
+          background: rgb(255, 244, 247);
           svg {
             color: rgba(var(--primary-color), 1);
           }
 
 
           &:hover {
-            background: rgb(255, 200, 216);
+            background: rgb(255, 222, 231);
           }
         }
       }
