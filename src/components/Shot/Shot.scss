@@ -78,8 +78,6 @@
           svg {
             color: rgba(var(--primary-color), 1);
           }
-
-
           &:hover {
             background: rgb(255, 222, 231);
           }
@@ -147,7 +145,11 @@
         svg {
           color: rgba(var(--primary-color), 1);
         }
-
+      }
+      .updatingIcon {
+        svg {
+          color: rgba(var(--primary-color), 0.5);
+        }
       }
     }
   }

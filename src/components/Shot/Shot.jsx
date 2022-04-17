@@ -11,40 +11,42 @@ const Shot = ({ shot }) => {
 
   const [updatedShot, setUpdatedShot] = useState(shot);
 
+  const [savingShot, setSavingShot] = useState(false);
+  const [likingShot, setLikingShot] = useState(false);
+
   let alreadySaved = !!updatedShot.save?.filter(
-    (item) => item.postedBy._ref === user?._id
+    (item) => item._ref === user?._id
   ).length;
 
   const saveShot = (id) => {
-    if (!alreadySaved) {
-      client
-        .patch(id)
-        .setIfMissing({ save: [] })
-        .insert("after", "save[-1]", [
-          {
-            _key: nanoid(),
-            userId: user?._id,
-            postedBy: {
-              _type: "postedBy",
+    if (!savingShot) {
+      setSavingShot(true);
+      if (!alreadySaved) {
+        client
+          .patch(id)
+          .setIfMissing({ save: [] })
+          .insert("after", "save[-1]", [
+            {
+              _key: nanoid(),
               _ref: user?._id,
             },
-          },
-        ])
-        .commit()
-        .then((item) => {
-          setUpdatedShot(item);
-          alreadySaved = !alreadySaved;
-        });
-    } else {
-      const reviewsToRemove = [`save[postedBy._ref == "${user?._id}"]`];
-      client
-        .patch(id)
-        .unset(reviewsToRemove)
-        .commit()
-        .then((item) => {
-          setUpdatedShot(item);
-          alreadySaved = !alreadySaved;
-        });
+          ])
+          .commit()
+          .then((item) => {
+            setUpdatedShot(item);
+            setSavingShot(false);
+          });
+      } else {
+        const reviewsToRemove = [`save[_ref == "${user?._id}"]`];
+        client
+          .patch(id)
+          .unset(reviewsToRemove)
+          .commit()
+          .then((item) => {
+            setUpdatedShot(item);
+            setSavingShot(false);
+          });
+      }
     }
   };
 
@@ -53,27 +55,34 @@ const Shot = ({ shot }) => {
   ).length;
 
   const likeShot = (id) => {
-    if (!alreadyLiked) {
-      client
-        .patch(id)
-        .setIfMissing({ like: [] })
-        .insert("after", "like[-1]", [
-          {
-            _key: nanoid(),
-            _ref: user?._id,
-          },
-        ])
-        .commit()
-        .then((item) => {
-          setUpdatedShot(item);
-        });
-    } else {
-      const likesToRemove = [`like[_ref == "${user?._id}"]`];
-      client
-        .patch(id)
-        .unset(likesToRemove)
-        .commit()
-        .then((item) => setUpdatedShot(item));
+    if (!likingShot) {
+      setLikingShot(true);
+      if (!alreadyLiked) {
+        client
+          .patch(id)
+          .setIfMissing({ like: [] })
+          .insert("after", "like[-1]", [
+            {
+              _key: nanoid(),
+              _ref: user?._id,
+            },
+          ])
+          .commit()
+          .then((item) => {
+            setUpdatedShot(item);
+            setLikingShot(false);
+          });
+      } else {
+        const likesToRemove = [`like[_ref == "${user?._id}"]`];
+        client
+          .patch(id)
+          .unset(likesToRemove)
+          .commit()
+          .then((item) => {
+            setUpdatedShot(item);
+            setLikingShot(false);
+          });
+      }
     }
   };
 
@@ -122,7 +131,9 @@ const Shot = ({ shot }) => {
                 e.stopPropagation();
                 likeShot(shot._id);
               }}
-              className={`${alreadyLiked ? "activeIcon" : ""}`}
+              className={`${
+                likingShot ? "updatingIcon" : alreadyLiked ? "activeIcon" : ""
+              }`}
             >
               <AiFillHeart fontSize={16} />
             </button>

@@ -6,11 +6,9 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 
 import shot from "./shot";
 import postedBy from "./postedBy";
-import save from "./save";
 import comment from "./comment";
 import user from "./user";
 import category from "./category";
-import like from "./like";
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
   // We name our schema
@@ -22,9 +20,7 @@ export default createSchema({
     category,
     shot,
     postedBy,
-    save,
     comment,
     user,
-    like
   ]),
 });

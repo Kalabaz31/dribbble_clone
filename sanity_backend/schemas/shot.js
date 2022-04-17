@@ -37,7 +37,7 @@ export default {
       name: 'save',
       title: 'Save',
       type: 'array',
-      of: [{ type: 'save' }],
+      of: [{type: 'reference', to: [{ type: "user" }]}],
     },{
       name: "like",
       title: "Like",
