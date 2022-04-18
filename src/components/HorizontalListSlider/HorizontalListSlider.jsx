@@ -3,11 +3,12 @@ import { Link, useParams } from "react-router-dom";
 
 import "./HorizontalListSlider.scss";
 
-const HorizontalListSlider = ({ list , pathName }) => {
-  const {category } = useParams();
+const HorizontalListSlider = ({ list, pathName }) => {
+  const { category } = useParams();
 
-  const [selectedElement, setSelectedElement] = useState(category ? category : "");
-
+  const [selectedElement, setSelectedElement] = useState(
+    category ? category : ""
+  );
 
   const listSliderRef = useRef();
   const activeElementRef = useRef();
@@ -21,7 +22,7 @@ const HorizontalListSlider = ({ list , pathName }) => {
   };
 
   useEffect(() => {
-    activeElementRef.current?.scrollIntoView()
+    activeElementRef.current?.scrollIntoView();
   }, [activeElementRef.current]);
 
   return (
@@ -40,7 +41,11 @@ const HorizontalListSlider = ({ list , pathName }) => {
       <div className="slide" ref={listSliderRef}>
         <ul>
           <li>
-            <Link to={`${pathName}`} className={selectedElement === "" ? "active" : ""}>
+            <Link
+              to={`${pathName}`}
+              className={selectedElement === "" ? "active" : ""}
+              onClick={() => setSelectedElement("")}
+            >
               All
             </Link>
           </li>

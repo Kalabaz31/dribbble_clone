@@ -21,7 +21,6 @@ const Login = () => {
     }
 
     if (isSuccess || user) {
-      console.log("user")
       navigate("/")
     }
 

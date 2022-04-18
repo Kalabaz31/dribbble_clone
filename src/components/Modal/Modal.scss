@@ -1,0 +1,65 @@
+.app__modal {
+  position: fixed;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: rgba(151, 10, 10, 0.178);
+  .overlay {
+    position: fixed;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: rgba(0, 0, 0, 0.6);
+
+    .btnClose {
+      border: 0;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background: transparent;
+      svg {
+        color: white;
+        font-size: 24px;
+      }
+    }
+  }
+
+  .modal-content {
+    position: absolute;
+
+    top: 40px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px 0;
+    background: white;
+
+    overflow-y: scroll;
+
+    .btnClose {
+      border: 0;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background: transparent;
+      display: none;
+      svg {
+        color: black;
+        font-size: 24px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      top: 0;
+      border-radius: 0;
+
+      .btnClose {
+        display: block;
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@ import "./Shots.scss";
 import { client, urlFor } from "../../client";
 import { Shot } from "../../components";
 
-const Shots = ({ pathName }) => {
+const Shots = ({ pathName , setNoScroll }) => {
   const { type, category } = useParams();
 
   const [shots, setShots] = useState([]);
@@ -25,19 +25,17 @@ const Shots = ({ pathName }) => {
 
   useEffect(() => {
     let query;
-    
-    if(selectedCategory){
-      query = `*[_type == 'shot' && '${selectedCategory?._id}' in category[]._ref]{title, about, image, 'postedBy': postedBy -> {userName, image} }`;
-    }else{
+
+    if (selectedCategory) {
+      query = `*[_type == 'shot' && '${selectedCategory?._id}' in category[]._ref]{..., 'postedBy': postedBy -> {userName, image} }`;
+    } else {
       query = `*[_type == 'shot']{..., 'postedBy': postedBy -> {userName, image} }`;
     }
 
     client.fetch(query).then((data) => {
-      console.log(data)
       setShots(data);
     });
-
-  }, []);
+  }, [selectedCategory]);
 
   return (
     <div className="app__shots">
@@ -46,10 +44,10 @@ const Shots = ({ pathName }) => {
 
         <div className="app__shots-list">
           {shots.map((shot) => (
-            
-            <Shot shot={shot} key={shot._id} />
-
+            <Shot shot={shot} key={shot._id} setNoScroll={setNoScroll} />
           ))}
+
+          {shots.length === 0 && (<p>No Shots Available!</p>)}
         </div>
       </div>
     </div>

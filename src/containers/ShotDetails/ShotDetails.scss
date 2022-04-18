@@ -1,0 +1,131 @@
+.app__shotDetails {
+  min-height: 90vh;
+  padding: 40px 0;
+}
+
+.app__shotDetails-container {
+  width: 80%;
+  max-width: 900px;
+  margin: auto;
+  min-height: 90vh;
+
+  padding: 20px 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 40px;
+
+  .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .shot-info {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 20px;
+      position: relative;
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgb(221, 221, 221);
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      @media screen and (max-width: 768px) {
+        .shot-header-title {
+          position: absolute;
+          top: -40px;
+          left: 0;
+          width: max-content;
+        }
+      }
+    }
+
+    .shot-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      button {
+        background: rgba(var(--secondary-color), 1);
+        border: 0;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        min-width: 60px;
+        transition: all 0.5s ease;
+      }
+
+      .btnLike {
+        background: rgba(var(--primary-color), 1);
+        color: white;
+      }
+
+      .btnLikeActive {
+        background: white;
+        border: 1px solid rgba(var(--primary-color), 1);
+        color: rgba(var(--primary-color), 1);
+      }
+
+      .btnSaveActive{
+        background-color: rgba(var(--primary-color), 0.07);
+        color: rgba(var(--primary-color), 1);
+      }
+    }
+  }
+
+  .shot-content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 30px;
+      color: black;
+    }
+  }
+
+}
+
+button {
+  cursor: pointer;
+}
+
+.spinner {
+  animation-name: spin;
+  animation-duration: 500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  font-size: 16px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

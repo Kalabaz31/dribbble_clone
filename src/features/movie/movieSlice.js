@@ -111,7 +111,6 @@ export const movieSlice = createSlice({
       .addCase(getData.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        console.log(action.payload);
         state.movies = action.payload;
       })
       .addCase(getData.rejected, (state, action) => {
@@ -126,7 +125,6 @@ export const movieSlice = createSlice({
       .addCase(getSeriesData.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        console.log(action.payload);
         state.series = action.payload;
       })
       .addCase(getSeriesData.rejected, (state, action) => {
@@ -155,7 +153,6 @@ export const movieSlice = createSlice({
       .addCase(getRecommendations.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        console.log(action.payload);
         state.recommendations = action.payload;
       })
       .addCase(getRecommendations.rejected, (state, action) => {

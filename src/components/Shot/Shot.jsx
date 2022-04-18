@@ -1,18 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { AiFillHeart, AiFillFolderAdd, AiFillEye } from "react-icons/ai";
 import { nanoid } from "nanoid";
+
+import { Modal } from "../";
 
 import { urlFor, client } from "../../client";
 
 import "./Shot.scss";
+import ShotDetails from "../../containers/ShotDetails/ShotDetails";
 
-const Shot = ({ shot }) => {
+const Shot = ({ shot, setNoScroll }) => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const [updatedShot, setUpdatedShot] = useState(shot);
 
   const [savingShot, setSavingShot] = useState(false);
   const [likingShot, setLikingShot] = useState(false);
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const [currentPathName, CurrentPathName] = useState(window.location.pathname);
+
+  const shotRef = useRef();
 
   let alreadySaved = !!updatedShot.save?.filter(
     (item) => item._ref === user?._id
@@ -86,9 +95,19 @@ const Shot = ({ shot }) => {
     }
   };
 
+  // useEffect(() => {
+  //   setNoScroll(openModal);
+  // }, [openModal, setNoScroll]);
   return (
-    <div className="app__shots-item">
-      <a href="#" className="app__shot-item-content">
+    <div className="app__shots-item" ref={shotRef}>
+      <a
+        href={`/shots/${shot._id}&${shot.title.replaceAll(" ", "-")}`}
+        onClick={(e) => {
+          e.preventDefault();
+          setOpenModal(true);
+        }}
+        className="app__shot-item-content"
+      >
         <img src={urlFor(shot.image)} alt="" />
         <div className="app__shots-item-links">
           <p key={shot.title}> {shot.title}</p>
@@ -96,6 +115,7 @@ const Shot = ({ shot }) => {
             <li>
               <button
                 onClick={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
                   likeShot(shot._id);
                 }}
@@ -110,6 +130,7 @@ const Shot = ({ shot }) => {
                 <AiFillFolderAdd
                   fontSize={20}
                   onClick={(e) => {
+                    e.preventDefault();
                     e.stopPropagation();
                     saveShot(shot._id);
                   }}
@@ -145,6 +166,24 @@ const Shot = ({ shot }) => {
           </p>
         </div>
       </div>
+      <Modal
+        openModal={openModal}
+        yPosition={shotRef.current?.scrollTop}
+        onClose={() => {
+          setOpenModal(false);
+
+          window.history.pushState(
+            "modal",
+            "ShotDetails Modal",
+            currentPathName
+          );
+        }}
+      >
+        <ShotDetails
+          href={`/shots/${shot._id}&${shot.title.replaceAll(" ", "-")}`}
+          setParentShot={setUpdatedShot}
+        />
+      </Modal>
     </div>
   );
 };

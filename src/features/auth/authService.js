@@ -3,11 +3,8 @@ import { client } from "../../client";
 // Login user
 const register = async (userData) => {
 
-  console.log("register")
-  console.log(userData)
   
   return await client.create(userData).then((user) => {
-    console.log(user)
     if (!user) {
       throw new Error("Wrong Credentials");
     } else {

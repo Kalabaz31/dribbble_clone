@@ -8,7 +8,6 @@ const Logout = () => {
 
   useEffect(() => {
     dispatch(logout());
-    console.log("logout");
     navigate("/login");
   }, [dispatch, navigate]);
 
